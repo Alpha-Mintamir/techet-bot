@@ -1,4 +1,5 @@
 from telegram import ReplyKeyboardMarkup, KeyboardButton, Update, InputFile
+from dotenv import load_dotenv
 from telegram.ext import (
     CommandHandler,
     MessageHandler,
@@ -23,8 +24,14 @@ packages = {
 }
 
 # Admins' chat IDs (replace with actual chat IDs)
-admins = [6927234281, 691090883, 112233445, 998877665, 556677889, 223344556]  # Replace with actual chat IDs
+import os
+from dotenv import load_dotenv
 
+# Load the environment variables from the .env file
+load_dotenv()
+
+# Retrieve the admin chat IDs from the environment variable
+admins = list(map(int, os.getenv("ADMIN_CHAT_IDS").split(",")))
 # Function to start the bot and show the main menu
 async def ad_booking(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.message.chat.id
