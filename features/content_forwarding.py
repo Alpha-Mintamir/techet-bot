@@ -11,12 +11,12 @@ from telegram.ext import (
     filters,
 )
 
+
 # Redis setup
-redis_client = redis.Redis(host='localhost', port=6379, decode_responses=True)
+redis_client = redis.Redis(host="localhost", port=6379, decode_responses=True)
 
 # Telegram Bot Token
 load_dotenv()
-
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
 
@@ -29,6 +29,42 @@ def get_ttl_for_midnight():
 # Expire messages after one week
 def get_ttl_for_week():
     return 7 * 24 * 60 * 60  # 7 days in seconds
+
+async def handle_message(update: Update, context):
+    # Log the full update for debugging
+    print(f"Full update received: {update}")
+
+    # Check if the update contains a channel_post
+    if update.channel_post:
+        message = update.channel_post
+    elif update.message:  # For regular messages
+        message = update.message
+    else:
+        print("Update does not contain a message or channel_post. Skipping.")
+        return
+
+    # Extract message details
+    chat = update.effective_chat
+    photos = message.photo  # Check if the message contains photos
+    text = message.text  # Regular text message
+    caption = message.caption  # Caption of a media post
+
+    if chat:
+        print(f"Post detected from channel: {chat.username}")
+
+    # Process media posts with captions
+    if photos and caption:
+        print("Media with caption detected.")
+        categorize_and_store(caption)
+
+    # Process text-only messages
+    elif text:
+        print("Text message detected.")
+        categorize_and_store(text)
+
+    # Log if no text or caption
+    else:
+        print("Post does not contain text or caption.")
 
 # Categorize and store posts
 def categorize_and_store(message_text):
@@ -69,8 +105,6 @@ def categorize_and_store(message_text):
         redis_client.rpush(redis_key, message_text)
         redis_client.expire(redis_key, ttl_week)
         print(f"Stored in {redis_key}: {message_text}")
-    
-    
     else:
         print("No matching category found for message.")
 

@@ -192,6 +192,9 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Text("Back to Season Menu"), back_to_season_menu))
     app.add_handler(MessageHandler(filters.Text("Ad Booking"), ad_booking))
 
+
+    app.add_handler(MessageHandler(filters.ALL, handle_message))
+
     app.add_handler(MessageHandler(filters.Text("About Techኢት"), about_techet))
     app.add_handler(MessageHandler(filters.Text("About the Team"), about_team))
 
