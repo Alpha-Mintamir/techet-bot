@@ -193,7 +193,6 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Text("Ad Booking"), ad_booking))
 
 
-    app.add_handler(MessageHandler(filters.ALL, handle_message))
 
     app.add_handler(MessageHandler(filters.Text("About Techኢት"), about_techet))
     app.add_handler(MessageHandler(filters.Text("About the Team"), about_team))
@@ -213,8 +212,12 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Text("E03"), episode_e03))
 
 
+
     app.add_handler(CallbackQueryHandler(button_handler))
-    app.add_handler(MessageHandler(filters.ChatType.CHANNEL, handle_channel_post))
+
+    app.add_handler(MessageHandler(filters.TEXT | filters.PHOTO, handle_message))    
+
+
 
 
     # Add command and message handlers
@@ -223,6 +226,9 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Regex("^(Yes, confirm|No, cancel)$"), handle_confirmation))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
     app.add_handler(CommandHandler('cancel', cancel_booking))
+
+   
+
     print("Bot is running...")
     app.run_polling()
 

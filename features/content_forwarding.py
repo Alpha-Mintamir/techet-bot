@@ -30,41 +30,7 @@ def get_ttl_for_midnight():
 def get_ttl_for_week():
     return 7 * 24 * 60 * 60  # 7 days in seconds
 
-async def handle_message(update: Update, context):
-    # Log the full update for debugging
-    print(f"Full update received: {update}")
 
-    # Check if the update contains a channel_post
-    if update.channel_post:
-        message = update.channel_post
-    elif update.message:  # For regular messages
-        message = update.message
-    else:
-        print("Update does not contain a message or channel_post. Skipping.")
-        return
-
-    # Extract message details
-    chat = update.effective_chat
-    photos = message.photo  # Check if the message contains photos
-    text = message.text  # Regular text message
-    caption = message.caption  # Caption of a media post
-
-    if chat:
-        print(f"Post detected from channel: {chat.username}")
-
-    # Process media posts with captions
-    if photos and caption:
-        print("Media with caption detected.")
-        categorize_and_store(caption)
-
-    # Process text-only messages
-    elif text:
-        print("Text message detected.")
-        categorize_and_store(text)
-
-    # Log if no text or caption
-    else:
-        print("Post does not contain text or caption.")
 
 # Categorize and store posts
 def categorize_and_store(message_text):
@@ -144,8 +110,47 @@ async def opportunities_menu(update: Update, context):
     await update.message.reply_text("Choose a category:", reply_markup=reply_markup)
 
 
-# Button Handler
-# Button Handler
+# This handler deals with regular messages (text or media posts)
+# This handler deals with regular messages (text or media posts)
+async def handle_message(update: Update, context):
+    # Ensure the update is not a callback query
+    if update.callback_query:
+        return  # Skip if it's a callback query, it will be handled by button_handler
+
+    # Handle both channel posts and regular messages
+    if update.channel_post:
+        message = update.channel_post
+        print(f"Channel post detected from channel: {update.channel_post.chat.username}")
+    elif update.message:
+        message = update.message
+    else:
+        print("Update does not contain a message or channel_post. Skipping.")
+        return
+
+    # Extract message details
+    chat = update.effective_chat
+    photos = message.photo  # Check if the message contains photos
+    text = message.text  # Regular text message
+    caption = message.caption  # Caption of a media post
+
+    if chat:
+        print(f"Post detected from channel: {chat.username if chat.username else 'unknown'}")
+
+    # Process media posts with captions
+    if photos and caption:
+        print("Media with caption detected.")
+        categorize_and_store(caption)
+
+    # Process text-only messages
+    elif text:
+        print("Text message detected.")
+        categorize_and_store(text)
+
+    # Log if no text or caption
+    else:
+        print("Post does not contain text or caption.")
+
+# This handler deals strictly with button presses (callback queries)
 async def button_handler(update: Update, context):
     query = update.callback_query
     await query.answer()
@@ -162,22 +167,3 @@ async def button_handler(update: Update, context):
     else:
         response = f"No {category.replace('_', ' ')} available for today."
         await query.edit_message_text(text=response)
-
-
-
-# Listen for channel posts
-async def handle_channel_post(update: Update, context):
-    print(f"Update received: {update}")  # Debugging
-    if update.channel_post:
-        print(f"Post detected from channel: {update.channel_post.chat.username}")
-        if update.channel_post.chat.username == CHANNEL_ID.replace("@", ""):
-            message_text = update.channel_post.text
-            if message_text:
-                categorize_and_store(message_text)
-            else:
-                print("Post does not contain text.")
-        else:
-            print("Message received from a different channel.")
-
-
-
