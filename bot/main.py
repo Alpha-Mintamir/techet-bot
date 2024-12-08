@@ -186,25 +186,19 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Text("Season 3"), season3_menu))
     app.add_handler(MessageHandler(filters.Text("Back to Main Menu"), back_to_main_menu))
     app.add_handler(MessageHandler(filters.Text("Back to Season Menu"), back_to_season_menu))
-    app.add_handler(MessageHandler(filters.Text("Ad Booking"), add_menu))
+    app.add_handler(MessageHandler(filters.Text("Ad Booking"), ad_booking))
 
     app.add_handler(MessageHandler(filters.Text("About Techኢት"), about_techet))
     app.add_handler(MessageHandler(filters.Text("About the Team"), about_team))
 
-
-    app.add_handler(MessageHandler(filters.Text("12 hours"), twelve_hours))
-    app.add_handler(MessageHandler(filters.Text("24 hours"), twenty_four_hours))
-    app.add_handler(MessageHandler(filters.Text("3 days"), three_days))
-    app.add_handler(MessageHandler(filters.Text("5 days"), five_days))
-    app.add_handler(MessageHandler(filters.Text("7 days"), seven_days))
 
     app.add_handler(MessageHandler(filters.Text("🎁 Package One"), package_one))
     app.add_handler(MessageHandler(filters.Text("🎁 Package Two"), package_two))
     app.add_handler(MessageHandler(filters.Text("🎁 Package Three"), package_three))
     
     # Add individual team member handlers
-    for member in team_members:
-        app.add_handler(MessageHandler(filters.Text(f"About {team_members[member]['name']}"), about_individual_member))
+    for member_key in team_members:
+        app.add_handler(MessageHandler(filters.Text(f"About {team_members[member_key]['name']}"), about_individual_member))
 
 
     app.add_handler(MessageHandler(filters.Text("E01"), episode_e01))
@@ -216,13 +210,12 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.ChatType.CHANNEL, handle_channel_post))
 
 
-    app.add_handler(CallbackQueryHandler(button_ad))
-    app.add_handler(CallbackQueryHandler(book_ad, pattern="^book_"))
-    app.add_handler(CallbackQueryHandler(cancel_booking, pattern="^cancel_booking$"))
+    # Add command and message handlers
 
-    # Message handlers
+    app.add_handler(MessageHandler(filters.Regex("^(12 hours|24 hours|3 days|5 days|7 days)$"), select_package))
+    app.add_handler(MessageHandler(filters.Regex("^(Yes, confirm|No, cancel)$"), handle_confirmation))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
-
+    app.add_handler(CommandHandler('cancel', cancel_booking))
     print("Bot is running...")
     app.run_polling()
 
