@@ -40,7 +40,7 @@ def categorize_and_store(message_text):
         redis_client.rpush(redis_key, message_text)
         redis_client.expire(redis_key, ttl_midnight)
         print(f"Stored in {redis_key}: {message_text}")
-    elif "#International" in message_text:
+    elif "#international" in message_text:
         redis_key = f"international_news:{today}"
         redis_client.rpush(redis_key, message_text)
         redis_client.expire(redis_key, ttl_midnight)

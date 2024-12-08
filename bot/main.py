@@ -153,7 +153,11 @@ async def our_service_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     await update.message.reply_text(
-        "Explore our Social Media Management Packages:", reply_markup=reply_markup
+        """The Social Media Management Gap
+Many businesses struggle to manage their social media effectively, often due to a lack of time, expertise, or resources. Consistent content creation, engagement, and performance tracking can be overwhelming, leading to missed opportunities for growth and brand visibility.
+
+At Techኢት, we bridge this gap by offering professional social media management services. We take care of everything from content creation and design to engagement and performance analysis, ensuring your social media presence is active, engaging, and aligned with your business goals. Let us handle your social media while you focus on growing your business.
+        Explore our Social Media Management Packages:""", reply_markup=reply_markup
     )
 
 # Function to handle the "Back to Main Menu" button
