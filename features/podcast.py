@@ -64,14 +64,30 @@ async def episode_e03(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 
 
 async def episode_e04(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info("Handling Episode E04")
+    logger.info("Handling Episode E03")
+    
+    # First photo and caption
     await update.message.reply_photo(
-        photo="https://example.com/guest4.jpg",
+        photo="https://media.licdn.com/dms/image/v2/D4E03AQFxph_Za9pkmQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1729414174125?e=1739404800&v=beta&t=gIIhlpen1K8WeYAE7delOHjFvbNkD_9kLdgQ1XQv9ak",
         caption=(
-            "🎙️ **Guest Name:** Bob Brown\n"
-            "🔗 [LinkedIn Profile](https://linkedin.com/in/bobbrown)\n"
-            "📖 *Description:* Bob is a cybersecurity expert with over 20 years of experience.\n"
-            "▶️ [Watch on YouTube](https://youtube.com/watch?v=exampleE04)"
+            "🎙️ **Guest Name:** Dawit Sishu\n"
+            "🔗 [LinkedIn Profile](https://www.linkedin.com/in/dawitsishu/)\n"
+            "📖 *Description:* Information Systems Graduate | Co-founder oc ICC.\n"
+            "▶️ [Watch on YouTube Part 1](https://youtu.be/xSE0TtkZszM?si=5By51qdKTsHTvV2bk)"
+
+        ),
+        parse_mode="Markdown",
+    )
+    
+    # Second photo and caption
+    await update.message.reply_photo(
+        photo="https://media.licdn.com/dms/image/v2/D4E03AQHGo7FcfFPK_w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721247596158?e=1739404800&v=beta&t=pKCAaMPmPthF4AUycWnmMsRhwhA6CRqCJ5r26QEPsQ8",
+        caption=(
+            "🎙️ **Guest Name:** Zelalem Yohannes\n"
+            "🔗 [LinkedIn Profile](https://www.linkedin.com/in/zelalemyohannes/)\n"
+            "📖 *Description:* Information Systems Graduate | Co-founder oc ICC.\n"
+            "▶️ [Watch on YouTube Part 1](https://youtu.be/xSE0TtkZszM?si=5By51qdKTsHTvV2bh)"
+
         ),
         parse_mode="Markdown",
     )
@@ -79,12 +95,12 @@ async def episode_e04(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 async def episode_e05(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info("Handling Episode E05")
     await update.message.reply_photo(
-        photo="https://example.com/guest5.jpg",
+        photo="https://media.istockphoto.com/id/1290743328/vector/faceless-man-abstract-silhouette-of-person-the-figure-of-man-without-a-face-front-view.jpg?s=612x612&w=0&k=20&c=Ys-4Co9NaWFFBDjmvDJABB2BPePxJwHugC8_G5u0rOk=",
         caption=(
-            "🎙️ **Guest Name:** Carol White\n"
-            "🔗 [LinkedIn Profile](https://linkedin.com/in/carolwhite)\n"
-            "📖 *Description:* Carol is a pioneer in renewable energy solutions.\n"
-            "▶️ [Watch on YouTube](https://youtube.com/watch?v=exampleE05)"
+            "🎙️ **Guest Name:** Ismael Aliyi\n"
+            "🔗 [LinkedIn Profile](https://linkedin.com/in/carolwhitehgjhg)\n"
+            "📖 *Description:* Computer Science student at Malaysia's Albukhary International University..\n"
+            "▶️ [Listen on Telegram](https://t.me/TechInEthio/552)"
         ),
         parse_mode="Markdown",
     )
