@@ -1,0 +1,4 @@
+python-telegram-bot==20.3
+logging
+datetime
+redis
