@@ -8,7 +8,7 @@ team_members = {
         "name": "Duresa Guye",
         "role": "SEO Specialist & Full-Stack Developer",
         "description": (
-            "Responsible for driving the overall business strategy, enhancing online presence through "
+            "Responsible for driving the overall business strategy, enhancing online presence through"
             "effective SEO practices, and developing comprehensive digital solutions from front-end to "
             "back-end to ensure seamless user experiences and functionality."
         ),
