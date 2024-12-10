@@ -1,4 +1,4 @@
-from telegram import ReplyKeyboardMarkup, KeyboardButton, Update, InputFile
+from telegram import ReplyKeyboardMarkup, KeyboardButton, Update
 from dotenv import load_dotenv
 from telegram.ext import (
     CommandHandler,
@@ -8,6 +8,10 @@ from telegram.ext import (
     filters
 )
 import logging
+import os
+
+load_dotenv()
+ACCOUNT_NUMBER = os.getenv("ACCOUNT_NUMBER")
 
 # Set up logging
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -24,14 +28,11 @@ packages = {
 }
 
 # Admins' chat IDs (replace with actual chat IDs)
-import os
-from dotenv import load_dotenv
-
-# Load the environment variables from the .env file
 load_dotenv()
 
 # Retrieve the admin chat IDs from the environment variable
 admins = list(map(int, os.getenv("ADMIN_CHAT_IDS").split(",")))
+
 # Function to start the bot and show the main menu
 async def ad_booking(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.message.chat.id
@@ -95,7 +96,8 @@ async def handle_confirmation(update: Update, context: ContextTypes.DEFAULT_TYPE
         if response == "yes, confirm":
             price = packages.get(package_choice)
             await update.message.reply_text(
-                f"Your ad has been booked for {package_choice.replace('_', ' ').title()} at {price}. Please upload a screenshot of your payment.",
+                f"Your ad has been booked for {package_choice.replace('_', ' ').title()} at {price}. "
+                f"Please pay with this account number {ACCOUNT_NUMBER} under the name Techኢት at CBE bank and provide your transaction number (payment ID) to confirm your payment.",
                 reply_markup=ReplyKeyboardMarkup([["Back to Main Menu"]], resize_keyboard=True)
             )
         elif response == "no, cancel":
@@ -111,31 +113,28 @@ async def handle_confirmation(update: Update, context: ContextTypes.DEFAULT_TYPE
     else:
         await update.message.reply_text("It seems you haven't booked an ad yet. Please start the booking process first.")
 
-# Function to handle photo upload
-async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+# Function to handle the payment transaction number input
+async def handle_transaction_number(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_data = context.user_data
     if "package_choice" in user_data:
         package_choice = user_data["package_choice"]
+        transaction_number = update.message.text.strip()
         price = packages.get(package_choice)
 
         await update.message.reply_text(
-            f"Thank you for your upload! We will process your booking for the {package_choice.replace('_', ' ').title()} package at {price} shortly.",
+            f"Thank you for providing your transaction number: {transaction_number}. Your booking for the {package_choice.replace('_', ' ').title()} package at {price} is confirmed!",
             reply_markup=ReplyKeyboardMarkup([["Back to Main Menu"]], resize_keyboard=True)
         )
 
         # Notify admins
-        photo_file = update.message.photo[-1]
-        photo_id = photo_file.file_id
-
         for admin in admins:
             try:
-                await context.bot.send_photo(
+                await context.bot.send_message(
                     chat_id=admin,
-                    photo=photo_id,
-                    caption=f"New ad booking!\n\nPackage: {package_choice.replace('_', ' ').title()}\nPrice: {price}\nUser: @{update.message.from_user.username or 'Unknown User'}"
+                    text=f"New ad booking!\n\nPackage: {package_choice.replace('_', ' ').title()}\nPrice: {price}\nTransaction Number: {transaction_number}\nUser: @{update.message.from_user.username or 'Unknown User'}"
                 )
             except Exception as e:
-                logger.error(f"Error sending photo to admin {admin}: {e}")
+                logger.error(f"Error sending message to admin {admin}: {e}")
 
         context.user_data.clear()
     else:

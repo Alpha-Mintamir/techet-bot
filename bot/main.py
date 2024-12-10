@@ -201,6 +201,14 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Text("🎁 Package One"), package_one))
     app.add_handler(MessageHandler(filters.Text("🎁 Package Two"), package_two))
     app.add_handler(MessageHandler(filters.Text("🎁 Package Three"), package_three))
+
+    
+    app.add_handler(MessageHandler(filters.Regex("^(12 hours|24 hours|3 days|5 days|7 days)$"), select_package))
+    app.add_handler(MessageHandler(filters.Regex("^(Yes, confirm|No, cancel|Back to Main Menu)$"), handle_confirmation))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_transaction_number))
+    
+    app.add_handler(CommandHandler('cancel', cancel_booking))
+
     
     # Add individual team member handlers
     for member_key in team_members:
@@ -212,25 +220,21 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Text("E03"), episode_e03))
 
 
-
     app.add_handler(CallbackQueryHandler(button_handler))
+    
+    app.add_handler(MessageHandler(filters.TEXT | filters.PHOTO, handle_message))
 
-    app.add_handler(MessageHandler(filters.TEXT | filters.PHOTO, handle_message))    
+
+    
 
 
 
 
     # Add command and message handlers
 
-    app.add_handler(MessageHandler(filters.Regex("^(12 hours|24 hours|3 days|5 days|7 days)$"), select_package))
-    app.add_handler(MessageHandler(filters.Regex("^(Yes, confirm|No, cancel)$"), handle_confirmation))
-    app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
-    app.add_handler(CommandHandler('cancel', cancel_booking))
+   
 
    
 
     print("Bot is running...")
     app.run_polling()
-
-
-
