@@ -205,7 +205,6 @@ if __name__ == "__main__":
     
     app.add_handler(MessageHandler(filters.Regex("^(12 hours|24 hours|3 days|5 days|7 days)$"), select_package))
     app.add_handler(MessageHandler(filters.Regex("^(Yes, confirm|No, cancel|Back to Main Menu)$"), handle_confirmation))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_transaction_number))
     
     app.add_handler(CommandHandler('cancel', cancel_booking))
 
@@ -223,6 +222,8 @@ if __name__ == "__main__":
     app.add_handler(CallbackQueryHandler(button_handler))
     
     app.add_handler(MessageHandler(filters.TEXT | filters.PHOTO, handle_message))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_transaction_number))
+    
 
 
     
