@@ -98,7 +98,7 @@ async def episode_e05(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         photo="https://media.istockphoto.com/id/1290743328/vector/faceless-man-abstract-silhouette-of-person-the-figure-of-man-without-a-face-front-view.jpg?s=612x612&w=0&k=20&c=Ys-4Co9NaWFFBDjmvDJABB2BPePxJwHugC8_G5u0rOk=",
         caption=(
             "🎙️ **Guest Name:** Ismael Aliyi\n"
-            "🔗 [LinkedIn Profile](https://linkedin.com/in/carolwhitehgjhg)\n"
+            "🔗 [LinkedIn Profile](https://www.linkedin.com/in/esmael-uta-28b09123b/)\n"
             "📖 *Description:* Computer Science student at Malaysia's Albukhary International University..\n"
             "▶️ [Listen on Telegram](https://t.me/TechInEthio/552)"
         ),
