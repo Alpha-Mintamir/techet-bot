@@ -6,7 +6,8 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 
 # Redis setup
 # this something that fails after hosting
-redis_client = redis.Redis(host="localhost", port=6379, decode_responses=True)
+REDIS_URL = os.getenv("REDIS_URL")
+redis_client = redis.from_url(REDIS_URL, decode_responses=True)
 
 # Telegram Bot Token
 load_dotenv()
