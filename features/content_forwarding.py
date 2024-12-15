@@ -3,16 +3,9 @@ import redis
 from datetime import datetime
 from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import (
-    ApplicationBuilder,
-    CommandHandler,
-    CallbackQueryHandler,
-    MessageHandler,
-    filters,
-)
-
 
 # Redis setup
+# this something that fails after hosting
 redis_client = redis.Redis(host="localhost", port=6379, decode_responses=True)
 
 # Telegram Bot Token

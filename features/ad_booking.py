@@ -31,7 +31,8 @@ packages = {
 load_dotenv()
 
 # Retrieve the admin chat IDs from the environment variable
-admins = list(map(int, os.getenv("ADMIN_CHAT_IDS").split(",")))
+admins = list(map(int, os.getenv("ADMIN_CHAT_IDS", "").split(","))) if os.getenv("ADMIN_CHAT_IDS") else []
+
 
 # Function to start the bot and show the main menu
 async def ad_booking(update: Update, context: ContextTypes.DEFAULT_TYPE):
