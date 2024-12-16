@@ -78,9 +78,9 @@ async def season1_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def season2_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info("Handling Season 2 menu")
     keyboard = [
-        ["E01", "E02", "E03", "E04", "E05"],
-        ["E06", "E07", "E08", "E09", "E10"],
-        ["E11", "E12", "E13", "E14"],
+        ["S02E01", "S02E02", "S02E03", "S02E04", "S02E05"],
+        ["S02E06", "S02E07", "S02E08", "S02E09", "S02E10"],
+        ["S02E11", "S02E12", "S02E13", "S02E14"],
         ["Back to Season Menu"],
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
@@ -94,7 +94,7 @@ async def season2_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 async def season3_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info("Handling Season 3 menu")
     keyboard = [
-        ["E01", "E02", "E03", "E04", "E05"],
+        ["S03E01"],
         ["Back to Season Menu"],
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
@@ -202,6 +202,37 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Text("E01"), episode_e01))
     app.add_handler(MessageHandler(filters.Text("E02"), episode_e02))
     app.add_handler(MessageHandler(filters.Text("E03"), episode_e03))
+    app.add_handler(MessageHandler(filters.Text("E04"), episode_e04))
+    app.add_handler(MessageHandler(filters.Text("E05"), episode_e05))
+    app.add_handler(MessageHandler(filters.Text("E06"), episode_e06))
+    app.add_handler(MessageHandler(filters.Text("E07"), episode_e07))
+    app.add_handler(MessageHandler(filters.Text("E08"), episode_e08))
+    app.add_handler(MessageHandler(filters.Text("E09"), episode_e09))
+    app.add_handler(MessageHandler(filters.Text("E10"), episode_e10))
+    app.add_handler(MessageHandler(filters.Text("E11"), episode_e11))
+    app.add_handler(MessageHandler(filters.Text("E12"), episode_e12))
+    app.add_handler(MessageHandler(filters.Text("E13"), episode_e13))
+    app.add_handler(MessageHandler(filters.Text("E14"), episode_e14))
+
+    app.add_handler(MessageHandler(filters.Text("S02E01"), episode_e16))
+    app.add_handler(MessageHandler(filters.Text("S02E02"), episode_e17))
+    app.add_handler(MessageHandler(filters.Text("S02E03"), episode_e18))
+    app.add_handler(MessageHandler(filters.Text("S02E04"), episode_e19))
+    app.add_handler(MessageHandler(filters.Text("S02E05"), episode_e20))
+    app.add_handler(MessageHandler(filters.Text("S02E06"), episode_e21))
+    app.add_handler(MessageHandler(filters.Text("S02E07"), episode_e22))
+    app.add_handler(MessageHandler(filters.Text("S02E08"), episode_e23))
+    app.add_handler(MessageHandler(filters.Text("S02E09"), episode_e24))
+    app.add_handler(MessageHandler(filters.Text("S02E10"), episode_e25))
+    app.add_handler(MessageHandler(filters.Text("S02E11"), episode_e26))
+    app.add_handler(MessageHandler(filters.Text("S02E12"), episode_e27))
+    app.add_handler(MessageHandler(filters.Text("S02E13"), episode_e28))
+    app.add_handler(MessageHandler(filters.Text("S02E14"), episode_e29))
+    app.add_handler(MessageHandler(filters.Text("S03E01"), episode_e30))
+    
+
+    
+    
 
     app.add_handler(CallbackQueryHandler(button_handler))
 
