@@ -379,7 +379,7 @@ async def episode_e19(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 async def episode_e20(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info("Handling Episode E20")
     await update.message.reply_photo(
-        photo="https://example.com/guest20.jpg",
+        photo="https://media.licdn.com/dms/image/v2/D4E03AQHLoYmy6dq_Rw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1720420827485?e=1740009600&v=beta&t=sgLXWCWmgdmG_1udzCSTCN7UOLjIESR3LaIW5xJXrB0",
         caption=(
             "🎙️ **Guest Name:** Elizabeth Yonas \n"
             "🔗 [LinkedIn Profile](https://www.linkedin.com/in/elizabeth-yonas-5900b8262/)\n"
@@ -388,6 +388,7 @@ async def episode_e20(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         ),
         parse_mode="Markdown",
     )
+    
 async def episode_e21(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info("Handling Episode E21")
     await update.message.reply_photo(
@@ -454,18 +455,20 @@ async def episode_e24(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         parse_mode="Markdown",
     )
 
+
 async def episode_e25(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info("Handling Episode E25")
+    logger.info("Handling Episode E23")
     await update.message.reply_photo(
         photo="https://media.licdn.com/dms/image/v2/D4D03AQHfoVxQDMwzuA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1726741438222?e=1740009600&v=beta&t=xkqtJrJWwDYgu2vrJ2hGJkSs80zpCXvMZpApTw7ND-I",
         caption=(
             "🎙️ **Guest Name:** Birhan Nega\n"
             "🔗 [LinkedIn Profile](https://www.linkedin.com/in/birhan-nega/)\n"
             "📖 *Description:* Fullstack Software developer at Exelia | .NET | Angular | React\n"
-            "▶️ [Watch on YouTube]https://youtu.be/5VFoix-UDQA?si=1S5XcIgR_U7JiY2u)"
+            "▶️ [Watch on YouTube](https://youtu.be/5VFoix-UDQA?si=1S5XcIgR_U7JiY2u)"
         ),
         parse_mode="Markdown",
     )
+
 
 async def episode_e26(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info("Handling Episode E26")
