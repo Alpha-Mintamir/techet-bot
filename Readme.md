@@ -11,7 +11,7 @@ Welcome to the Tech Bot repository! This bot is designed for the techኢት Tele
 - **Content Forwarding**: Forwards content from the specified Telegram channel to the bot based on the tag used in the channel.
 - **Opportunities Menu**: Provides information about job opportunities, internships, and scholarships.
 - **Tech Humor Section**: Shares tech-related jokes and memes.
-- **Tech Events Section**: Displays upcoming tech events and conferences.
+- **Tech Events Section**: Display upcoming tech events and conferences.
 - **Ad Booking Section**: Allows users to book ads for the Telegram channel.
 
 
